@@ -1,3 +1,6 @@
+https://demo.w3layouts.com/demos_new/template_demo/07-03-2020/estate_liberty-demo_Free/58112989/web/index.html
+https://preview.colorlib.com/#konato
+
 1). create project folder
 2). pyenv local python-version
 3). mkvirtualenv project-name // better use project-name as env name
@@ -223,4 +226,115 @@ b). realtor : btre->realtors->admin.py
 
 ---
 
-112).
+post the page listings data from database
+for vs code only, install pylint-django for the syntax
+pip install pylint-django
+112). open listings-> views.py
+113). btre->templates->listings->listings.html
+remove multiply listing by dynamic looping from database
+114). create loop block in views.py
+115). remove all 6 listings
+116). replace hard code values with database values
+117). btre.setting within App add humanize
+118). at the more info, that will route to id
+
+---
+
+django paginator in a view
+119). main part is template->listings->listing.html
+
+---
+
+fixing the index page listings
+120). page->views.py, template-> pages->index.html
+fixing the realtor related pages,
+page-> views.py, template->pages->about.html , update the team section, card section for mvp
+
+---
+
+work on more info
+template.listings.listing.html
+copy from resources->btre_theme->dist->listing.html
+from show case before footer
+121). set the if block for optional images
+122). modift listings->views function for listing/id
+
+---
+
+123). modify the search section of the main page
+a). put all the selections into dictionary
+b). create listings-> choices.py
+c). update pages-> views.py import the dictionary
+d). update templates->pages->index.html // use a for loop to get all the key. values pairs
+124). within listings.url, we have the serach function, we can make use of the search
+125). copy the search.html from resources-> btre_theme->dist->assets folder. Pick the code between nav_bar and footer. Paste into template->listings->search.html
+126). the search page is very similar to listings page, we can copy the all the choices functions
+copy the for loops from templates->pages->index.html
+
+---
+
+set filter for selection in the query
+127). continue working on listings->views.py
+128). within the search function add queryset to generate a listings and passing into search page
+129). most of the layout of search.html is similar to listings.html, we can copy the looping structure, replace all the listing1 to 6 by the for loop
+
+---
+
+add search function
+130). add search function within templates->pages->search.html
+listings->views.py
+template->pages->index.html
+
+---
+
+keep the search words within the field
+131). keep the request.object and passing into template engine
+update listings->views.py
+insert "if" inside the tab templates->pages->index.html
+
+---
+
+user login part
+django initial setup created user account for admin as basic under tables->auth_user
+we still to create frontend for the user accounts
+132). create account app
+python manage.py startapp accounts
+133). create templates->accounts->login.html, dashboard.html, register.html
+134). within the accounts, create urls.py (it is not generate by startapp)
+135). resigter the app within the btre->settings.py 42.pdf
+136). define the route under btre.urls for main entry endpoint
+137). copy listings.urls.py into accounts->urls.py , define the functions of the accounts routes
+138). before the login links within the nav_bar, we need to modify the partials/\_nav_bar.html replace the login of the nav_bar at the bottom section
+139). after updated the nav_bar then testing the linking route
+140). update the highlight condition for the nav_bar login link same as listings part
+
+---
+
+141). copy the resources->bre_theme->dist->assets html into login.html, register.html, dashboard.html
+142). update the header and modify the method="post"
+
+---
+
+django message app
+143). include the django.contrib.message into btre.settings.py
+144). add \_alert.html into partial folder
+145). insert auth token within the register.html
+146). update message module within the accounts->view.py
+147). include alert partial into register.html for pop up messages
+148). same message pastew into login.html
+149). add fade out message feature by adding fadout within btere->static->js->main.js
+150). need to include the static into django
+python manage.py collectstatic
+django will copy btre.static.js.main.js into static.js // copy to _the static folder with admin folder_
+151). to test the effect, make sure you clear the browser cashe
+
+---
+
+152). coding on login under accounts->views.py
+153). update the dashboard with the route
+154). update the Nav_bar for logout and hide the login
+155). once login, should only show the dashboard
+
+---
+
+156). update page title tab with dynamic

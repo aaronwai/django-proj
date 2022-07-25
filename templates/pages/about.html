@@ -55,22 +55,23 @@
         </p>
       </div>
       <div class="col-md-4">
+        <!-- MVP part -->
+        {% if mvp_realtors %}
+        <!-- no else for this part-->
+        {% for realtor in mvp_realtors %}
         <div class="card">
-          <!-- update the static path -->
           <img
             class="card-img-top"
-            src="{% static 'img/realtors/alan.jpg' %}"
+            src="{{ realtor.photo.url }}"
             alt="Seller of the month"
           />
           <div class="card-body">
             <h5 class="card-title">Seller Of The Month</h5>
-            <h6 class="text-secondary">Alan Chan</h6>
-            <p class="card-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              nesciunt amet, illo itaque similique repellat. content.
-            </p>
+            <h6 class="text-secondary">{{ realtor.name}}</h6>
+            <p class="card-text">{{ realtor.desciption }}</p>
           </div>
         </div>
+        {% endfor %} {% endif %}
       </div>
     </div>
   </div>
@@ -94,49 +95,26 @@
   <div class="container">
     <h2 class="text-center">Our Team</h2>
     <div class="row text-center">
-      <div class="col-md-4">
-        <!-- update image path-->
-        <img
-          src="{% static 'img/realtors/alan.jpg' %}"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Alan Chan</h4>
-        <p class="text-success">
-          <i class="fas fa-award text-success mb-3"></i> Realtor
-        </p>
-        <hr />
-        <p><i class="fas fa-phone"></i> (555)-555-5555</p>
-        <p><i class="fas fa-envelope-open"></i> alan@btrealestate.co</p>
-      </div>
-
+      <!-- fixing from here for all realtors-->
+      {% if realtors%}
+      <!-- loop the database -->
+      {% for realtor in realtors %}
       <div class="col-md-4">
         <!-- update image path -->
-        <img
-          src="{% static 'img/realtors/ryan.jpg' %}"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Ryan Lee</h4>
+        <img src="{{ realtor.photo.url }}" alt="" class="rounded-circle mb-3" />
+        <h4>{{ realtor.name }}</h4>
         <p class="text-success">Realtor</p>
         <hr />
-        <p><i class="fas fa-phone"></i> (444)-444-4444</p>
-        <p><i class="fas fa-envelope-open"></i> ryan@btrealestate.co</p>
+        <p><i class="fas fa-phone"></i> {{ realtor.phone }}</p>
+        <p><i class="fas fa-envelope-open"></i> {{ realtor.email }}</p>
       </div>
-
-      <div class="col-md-4">
-        <!-- image path -->
-        <img
-          src="{% static 'img/realtors/anna.jpg' %}"
-          alt=""
-          class="rounded-circle mb-3"
-        />
-        <h4>Anna Cheung</h4>
-        <p class="text-success">Realtor</p>
-        <hr />
-        <p><i class="fas fa-phone"></i> (333)-333-3333</p>
-        <p><i class="fas fa-envelope-open"></i> Anna@btrealestate.co</p>
+      {% endfor %}
+      <!-- no realtor -->
+      {% else %}
+      <div class="col-md-12">
+        <p>No Realtors Available</p>
       </div>
+      {% endif %}
     </div>
   </div>
 </section>
