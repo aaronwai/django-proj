@@ -1,91 +1,132 @@
-https://demo.w3layouts.com/demos_new/template_demo/07-03-2020/estate_liberty-demo_Free/58112989/web/index.html
-https://preview.colorlib.com/#konato
+https://www.youtube.com/watch?v=b4iFyrLQQh4i
 
-1). create project folder
-2). pyenv local python-version
-3). mkvirtualenv project-name // better use project-name as env name
-4). workon project-name // switch to project env
-5). pip freeze //check any package installed
-6). pip list // show all the package with version info
-7). pip show django // show django version
-8). pip install django==version // install django inside the virtualenv folder
-9). django-admin startproject name // create a main project folder
-10). after manage.py show up then switch to python manage for the main control command
-11). in vscode, command+p, select interpreter, pick the virtual name
-12). install pep8 for VS code
-13). git init // for git
-14). create .gitignore
+1). Project assets setup
+a). theme selection
+https://demo.w3layouts.com/demos_new/template_demo/07-03-2020/estate_liberty-demo_Free/58112989/web/index.html
+b). or another template resources
+https://preview.colorlib.com/#konato
+c). lightbox css
+https://lokeshdhakar.com/projects/lightbox2/
+
+2). create project folder
+3). pyenv local python-version
+4). mkvirtualenv project-name // better use project-name as env name
+5). workon project-name // switch to project env
+6). pip freeze //check any package installed
+7). pip list // show all the package with version info
+8). pip show django // show django version
+9). pip install django==version // install django inside the virtualenv folder
+
+---
+
+## Build the main project folder
+
+10). django-admin startproject name // create a main project folder then control job will pass the manage.py
+11). after manage.py show up then switch to python manage for the main control command
+12). in vscode, command+p, select interpreter, pick the virtual name
+13). install autopep8 for VS code pip install autopep8
+
+---
+
+Git setup
+
+---
+
+14). git init // setup git by creating .gitignore
 15). goto gitignore.io, pick the framework for ignore
 16). git init // setup .git folder
 17). git add . && git commit -m "Initial commit"
 
 ---
 
+Main project files after creating the django folder
+
+---
+
 18). python manage.py runserver
-19). once the server is running, db.sqlite3 created
-20). within btre folder, setting is the important one
-21). within setting, allowed hosts [] is for server deployment
-22). root_urlconf is the url config file for the route
-23). templates , the html templates
-24). wsgi - django build service
-25). databases - db parameter, engine
-26). auth - server passwords
-27). static url - all the assets files
+a). go to localhost:8000, if the page is up then the inital setup is correct
+19). once the server is running, db.sqlite3 created. this is not the db for real application
+20). within btre folder, settings.py is the important one
+a). within settings, allowed hosts [] is for server deployment, server provide IP address
+b). root_urlconf is the url config file for the route that points to the project.urls
+c). templates , the html templates to clients, all the pages are group together
+d). wsgi - django build service
+e). databases - db engine with login username, password.
+f). auth - server passwords
+g). static url - all the assets files
+
+20). urls.py - routing file
+21). path(route/ views) the path links to a views or another file for sub-route views as a complete API
+
+22). wsgi - web service gateway interface. how web service communicate with app application and how app application chains process for request
 
 ---
 
-28). urls.py - routing file
-29). path(route/ views) as a complete API
+create first app - pages app pull models and html pages together
 
 ---
 
-30). wsgi - web application communicate with app services
+23). python manage.py startapp pages
+24). pages folder is at the same level with main project folder
+25). Within the folder
+a). migrations - in case there is dbase that migrated, for this app, we won't have any database
+b). admin - any info need to show in the admin area. for admin login, we are not applying admin for this app
+c). apps.py - PagesConfig function link the app with register under project settings.py file
+d). models.py - database structure with all the fields
+e). tests.py - for testing
+f). views.py - link url to "methods" as "control"
 
 ---
 
-31). create app
-32). python manage.py startapp pages
-33). pages folder is at the same level with main project folder
-34). migrations - in case there is dbase that migrated, for this app, we won't have any database
-35). admin for admin login, we are not applying admin for this app
-36). apps.py - pagesconfig link with setting file
-37). models.py - database
-38). tests.py - for testing
-39). views.py - link url to "methods"
+## step 1 : Register the app inside the main project folder
+
+26). register app inside the btre/settings.py -> installed_apps 4. btre.pdf
+27). in case, VScode with formatted autoPEP8 not install error message then pip install autopep8
 
 ---
 
-40). register app inside the btre/settings.py -> installed_apps 4. btre.pdf
-41). create urls.py inside pages folder
-42). add the urls path
-43). views.py add the callback function
-44). brte.urls add the / and route to pages.urls
+## step 2 : update the urls
+
+28). create urls.py inside pages folder, (App won't create the urls.py automatically, so we create the urls.py)
+29). add the urls path within the urlpattens[] (7b pages.urls.py)
+a). views.index as the callback function to the views.py function and give a name as "index" for easy access the path
+30). views.py add the callback functions (7c. pages.views.py)
+31). go back to the project brte.urls.py add the / and include the route to pages.urls. Set the route searching order by arrange the API from top to the bottom. Usually, admin/ should be the last one (7d. btre.urls.py)
 
 ---
 
-45). in the project.setttings.py, add the templates inside the DIRS[]
-46). add tempates for the project by templates/pages
-47). add index and about html files
-48). pages.urls.py add path
-49). pages.views.py add functions for the route html pages
+## step 3 : update the templates for render the html
+
+32). in the project.setttings.py, add the templates inside the DIRS[]
+(7d. btre.settings.py)
+33). add tempates for the project by creating templates/pages for "/index.html" and "/about.html"
+a). add index and about html files into the folder
+b). for testing purpose, add simply h1 tage for both files
+34). pages.urls.py add about path (8. pages.urls.py)
+35). pages.views.py add functions for the about route html (7b. pages.views.py)
 
 ---
 
-50). create partial for the template pages
-51), under templates folder add the base.html for the main partials
-52). add the extends into index, about.html
+## Step 4: create partials by setup base.html for header section
+
+36), under templates folder add the base.html for the main partials
+37). add the extends as the first line of {% base.html %} into index, about.html
 
 ---
 
-setup assets files from template
-53). import frontend files into static folder
-54). create static folder under btre folder
+## Step 5. setup assets files from template
+
+38). import frontend files into static folder
+39). create static folder under btre folder
 copy (btre_resources ->btre theme ->dist ->assets -> css, js, webfonts) to main project static (btre -> static)
-55). img folder, not all the img need to copy.
-56). image->home, realitor will upload to admin
-57). only copy lightbox, and logo.prn into btre->static->img
-58). define the static condtions under btre.settting static then  
-59). copy all the static files from main project to project -> static by
+40). create img folder, not all the img need to copy.
+41). image related to home, realitor will upload to admin
+42). only copy lightbox, and logo.prn into btre->static->img
+43). a). define the static conditions under btre.settting static then
+(9. btre.settings.py) (add 2 lines of static setting under static section)
+b). first line is link the root directory with static
+c). last line is set the source of the static files
+44). copy all the static files from main project to project -> static by
 
 python manage.py collectstatic
 
@@ -95,46 +136,76 @@ python manage.py collectstatic
 
 ---
 
-62). open dist->assets->index.html copy 3 css link into meta area
-go to bottom copy JS script link to the bottom of <body> base.html
-63). update the assets/ path by {% static 'css/all.css' %} and so on 10.base.html.pdf
+## Step 6 : building base html partials one by one
+
+62). copy the resouces->index.html file to base.html, cut out all the mid-section (10. base.html)
+a). keep the header and JS script part as a base.html
+b). update the assets part by {% include static %} as the top
+c). update the assets/ path by {% static 'css/all.css' %} and so on 10.base.html.pdf
+
+63). keep the top bar and Nav bar and footer inside the base.html
+64). after testing the base.html then refactor the base.html into partials
+a). base.html should contains header, <body> just with one line {% block content %} {% end block %} and <script>
 
 ---
 
-64). add the top bar and Nav bar and footer inside the base.html
-65). after testing then refactor the base.html into partials
-create partials under template folder
-66). move all the section into different html files
-67). fixed the log wthin the nav bar
-68). copy the rest of the content into index.html
-69). same for about, copy all the section freom about into template.about.html, make sure checking for any image files and update the imag path
+## Step 7. create partials folder under template folder
+
+65). move all the section into different html files
+a). create \_topbar.html, \_navbar.html, \_footer.html
+b). move each sections into the files
+c). from the base.html, {% include 'partials/_topbar.html' %} and so on
+66). each of the partils use {% load "static" %} at the top
+a). make sure fixed the logo to "static" wthin the nav bar
+b). check the rest of the partials for any possible fixes
 
 ---
+
+## Step 8 : build the index and about html 12. pdf
+
+67). build the index.html by copying the showcase section before the footer section.
+68). same for about, copy all the section from about.html into template.about.html, make sure checking for any image files and update the imag path
+69). within the pages/index and about.html, replace any links with {% url "index" %} or "about"
+a). (index and about) are where we defined withn the pages/urls.py
+name='index'
+b). we don't setup the listings.html yet so we leave it alone and come back to update the href="listings.html"
+70). want to fix the link highlight by spot the <li> with "active"
+and write the conditional statement
+{% if "/" == request.path %} for both files
+
+---
+
+## Step 9: build listings app for the housing content and register within the project settings.py
 
 70). create listing app
 python manage.py startapp listings //for all the listing searching page
-python manage.py startapp realtors // admin models
-71). withing the templates add listings folder -> listing.html, listings.html, search.html
-72). listings folder add urls.py, copy the same content from pages.urls.py
-73). a). put the APP inside the proj.setting.py installed_app
-b).put the listing route inside proj->urls.py urlpatterns
+python manage.py startapp realtors // realtors admin models
+71). within the templates add listings folder -> create listing.html, listings.html, search.html
+72). within listings folder add urls.py, copy the same content from pages.urls.py, for the time being
+73). a). register the both APPs, within the proj.setting.py installed_app, copy the settings as pagesconfig
+b). put the listing route inside proj->urls.py urlpatterns, this time under the '',(second API route)
+
+## Step 10: basic setup of APP urls and views
+
+74). listings -> views.py add callback function based on urls.py the route, listings -> views is the main routing of the all the housing html
+75). a). route API use listings/ , internal functions use listings as main collections of functions
+b). listings->urls.py put /id API as <int:>
+76). for template->listings->listings, listing, search, put in {% entends 'base.html' %} {% block content %}and then dummy H1 tag for the time being,
+77). go test the link of the page, make sure routes are working with topbar/navbaer/footer for the time being
 
 ---
 
-74). listings -> views.py add callback function for the route
-listings -> views is the main routing of the all the html
-75). route API use listings/ , internal functions use listings as main collections of functions
+## Step 10 b: copy resources template into listings template
+
+78). from resources folder theme pickup listings.html and copy the content into listings ->listings.html everything between Navbar/footer
+79). within listings, fixed all the page links to listing, search so on
+80). next will remove all the listings part of the content after link with database and render the content plus "pricing"
+81). fixing the nav_bar for the features listing
 
 ---
 
-76). from resources folder theme pickup listings.html and copy the content into listings ->listings.html everything between Navbar/footer
-77). fixed all the page links to listing, search so on
-78). next will remove all the listings part of the content after link with database and render the content plus "pricing"
-79). fixing the nav_bar for the features listing
+## Step 11 : database part of the project
 
----
-
-here is the database part of the project
 80). install postgres
 https://postgresapp.com/
 https://www.pgadmin.org/
@@ -338,3 +409,42 @@ django will copy btre.static.js.main.js into static.js // copy to _the static fo
 ---
 
 156). update page title tab with dynamic
+157). work on templates->base.html put a title block inside the title
+158). index.html , add title block
+159). about.html , add title block
+160). listings.html, add title block
+add the tile block for every html file
+
+---
+
+last app for the project - add contact
+python manage.py startapp contacts
+161). OPEN MODELS.PY add the data structure
+162). register thee app within setting.py
+163). python manage.py makemigrations contacts //create the 0001 file
+164). python manage.py migrate // that will add the table inside the postgresql
+165). register in contacts.admin for listing in admin panel
+166). create contact.urls.py file, add the urls for form submit purpose
+167). update btre->urls.py of the contact urls
+168). setup contacts->views for function
+169). work on templates->listings->listing.py inquiry modal section
+
+---
+
+form submit
+170). add functions into contact.views.py
+171). listing.html @180 add the method="post"
+171). listing.html at 197, remove disable
+
+---
+
+email setup
+171). update btre.settings.py // add the email setting at the bottom 53.pdf
+172). contact->views.py add email function after save()
+173). 54. contact.view.py
+
+---
+
+dashboard dynamic
+174). accounts.views.py
+175). template.accounts.dashboard

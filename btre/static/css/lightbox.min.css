@@ -68,7 +68,7 @@ html.lb-disable-scrolling {
   width: 32px;
   height: 32px;
   margin: 0 auto;
-  background: url(../images/loading.gif) no-repeat;
+  background-image: url(../img/lightbox/loading.gif);
 }
 .lb-nav {
   top: 0;
@@ -93,7 +93,7 @@ html.lb-disable-scrolling {
   width: 34%;
   left: 0;
   float: left;
-  background: url(../img/lightbox/prev.png) left 48% no-repeat;
+  background-image: url(../img/lightbox/prev.png) left 48% no-repeat;
   filter: alpha(Opacity=0);
   opacity: 0;
   -webkit-transition: opacity 0.6s;
